@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WDSinyalDV Premium</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            /* Warna background otomatis mengikuti tema Telegram */
+            background-color: var(--tg-theme-bg-color, #0f172a);
+            color: var(--tg-theme-text-color, #ffffff);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        .btn-primary {
+            background-color: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+        }
+        .card {
+            background-color: var(--tg-theme-secondary-bg-color, rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6">
+
+    <div class="card w-full max-w-sm rounded-3xl p-8 shadow-2xl text-center">
+        <div class="w-20 h-20 bg-blue-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
+            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+        </div>
+
+        <h1 class="text-2xl font-bold mb-2">WDSinyalDV Hub</h1>
+        <p class="opacity-70 mb-8 text-sm text-balance">Klik tombol di bawah untuk masuk ke grup sinyal atau kembali ke chat.</p>
+
+        <button onclick="bukaGrup()" class="btn-primary w-full py-4 rounded-2xl font-bold mb-4 flex items-center justify-center gap-2 transform active:scale-95 transition-all">
+            <span>Buka Telegram Group</span>
+        </button>
+
+        <button onclick="tutupAplikasi()" class="w-full py-4 rounded-2xl font-medium opacity-60 hover:opacity-100 transition-opacity">
+            Kembali ke Chat
+        </button>
+    </div>
+
+    <script>
+        // Inisialisasi Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand(); // Membuat tampilan jadi full screen
+
+        function bukaGrup() {
+            // Efek getar biar terasa pro
+            tg.HapticFeedback.impactOccurred('medium');
+            
+            // Membuka link grup di dalam Telegram
+            tg.openTelegramLink("https://t.me/KumpulanWDSinyalDV");
+        }
+
+        function tutupAplikasi() {
+            tg.HapticFeedback.notificationOccurred('success');
+            
+            // INI KUNCINYA: Menutup aplikasi web dan kembali ke chat
+            tg.close();
+        }
+
+        // Opsional: Jika user menekan tombol "Back" fisik/bawaan Telegram di pojok kiri atas
+        tg.BackButton.show();
+        tg.BackButton.onClick(() => {
+            tg.close();
+        });
+    </script>
+</body>
+</html>
